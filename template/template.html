@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <style>
+        body {
+            width: 595px;
+            min-height: 842px;
+            font-size: 0.6em;
+        }
+    </style>
+</head>
+<body>
+    <section class="section">
+        <!-- Top Right (Facture: N°, date, échéance) -->
+        <div class="container">
+            <div class="columns">
+                <div class="column is-5 is-offset-7">
+                    <p class="title is-6">Facture N°{{.invoiceNbr}}</p>
+                    <p>Date de facturation: {{.invoiceDate}}</p>
+                    <p>Echeance: {{.invoiceUntil}}</p>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <br/>
+        <div class="container">
+            <div class="columns">
+                <!-- left (me info) -->
+                <div class="column">
+                    <strong>{{.meName}}</strong>
+                    <p>{{.meAddr}}</p>
+                    <p>{{.meCity}}</p>
+                    <p>{{.mePostcode}}</p>
+                    <p>{{.mePhone}}</p>
+                    <p>{{.meEmail}}</p>
+                </div>
+                <!-- right (client info) -->
+                <div class="column">
+                    <strong>{{.clientName}}</strong>
+                    <p>{{.clientAddr}}</p>
+                    <p>{{.clientPostCode}}</p>
+                    <p>{{.clientCity}}</p>
+                </div>
+            </div>
+        </div>
+        <!-- SPACE -->
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <!-- SPACE -->
+        <!-- table -->
+        <div class="container">
+            <div class="columns is-multiline">
+                <div class="column is-12">
+                    <table class="table is-striped is-fullwidth ">
+                        <thead>
+                            <tr>
+                                <th>N°</th>
+                                <th>Description</th>
+                                <th>Qté</th>
+                                <th>Unité</th>
+                                <th>Prix unitaire</th>
+                                <th>Montant</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>01</td>
+                                <td>Clipr</td>
+                                <td>15.0</td>
+                                <td>h</td>
+                                <td>25 {{.currency}}</td>
+                                <td>375.00 {{.currency}}</td>
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>Clipr</td>
+                                <td>15.0</td>
+                                <td>h</td>
+                                <td>25 {{.currency}}</td>
+                                <td>375.00 {{.currency}}</td>
+                            </tr>
+                            <!-- .... MORE .... -->
+                            <tr>
+                                <th>Sous-total</th>
+                                <th/>
+                                <th/>
+                                <th/>
+                                <th/>
+                                <th>000.00 {{.currency}}</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="column is-12">
+                    Taux de change appliqué: {{.currency}}/EUR, selon le taux de change de référence de la BCE au: {{.invoiceDate}}. Taux: {{.rate}}
+                </div>
+                <div class="column is-4 is-offset-8">
+                    <!-- SEPARATOR -->
+                    <table class="table is-striped">
+                        <thead>
+                            <tr>
+                                <th>Total TTC</th>
+                                <th>000 {{.currency}}</th>
+                            </tr>
+                            <tr>
+                                <th>Total HT</th>
+                                <th>000 {{.currency}}</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- SPACE -->
+        <br/>
+        <br/>
+        <!-- SPACE -->
+        <!-- moyen de paiement -->
+        <div class="container">
+            <div class="columns is-multiline">
+                <div class="column is-12">
+                    <div class="columns">
+                        <div class="column is-3"><strong>Moyen de paiement:</strong></div>
+                        <div class="column">
+                            <p>Banque: {{.meAccount}}</p>
+                            <p>SWIFT/BIC: {{.meSwiftBic}}</p>
+                            <p>IBAN: {{.meIBAN}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="column is-12">
+                    <div class="columns">
+                        <div class="column is-3"><strong>Condition de paiement:</strong></div>
+                        <div class="column">
+                            <p>30 jours</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- SPACE -->
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <!-- SPACE -->
+        <!-- footer -->
+        <div class="columns is-centered">
+            <div class="column is-narrow has-text-centered">
+                <p>TVA non applicable - article 259-1 du CGI</p>
+                <strong>SPANIER Nathan - Auto-entrepreuneur</strong>
+                <p><i>{{.addresse}}</i></p>
+                <p><i>N° SIRET: {{.siret}} - N° TVA: {{.tva}}</i></p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
