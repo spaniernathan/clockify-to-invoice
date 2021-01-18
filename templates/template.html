@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+        <style>
+            body {
+                background-color: beige;
+                font-size: 0.6em;
+            }
+        </style>
+    </head>
+    <body>
+        <section class="section">
+            <div class="container">
+                <div class="columns">
+                    <div class="column is-5 is-offset-7">
+                        <p class="title is-6">Facture N°{{.InvoiceNumber}}</p>
+                        <p>Date de facturation: {{.InvoiceDate}}</p>
+                        <p>Echeance: {{.InvoiceUntil}}</p>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <div class="container">
+                <div class="columns">
+                    <div class="column">
+                        <strong>{{.Settings.User.UserInfo.CompagnyName}}</strong>
+                        <p>{{.Settings.User.UserInfo.Name}}</p>
+                        <p>{{.Settings.User.Address.Address}}</p>
+                        <p>{{.Settings.User.Address.PostCode}} {{.Settings.User.Address.City}}</p>
+                        <p>{{.Settings.User.Address.Country}}</p>
+                        <p>{{.Settings.User.UserInfo.PhoneNumber}}</p>
+                        <p>{{.Settings.User.UserInfo.Email}}</p>
+                    </div>
+                    <div class="column">
+                        <strong>{{.Settings.Client.Name}}</strong>
+                        <p>{{.Settings.Client.Address.Address}}</p>
+                        <p>{{.Settings.Client.Address.PostCode}} {{.Settings.Client.Address.City}}</p>
+                        <p>{{.Settings.Client.Address.City}}</p>
+                        <p>{{.Settings.Client.Address.Country}}</p>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <div class="container">
+                <div class="columns is-multiline">
+                    <div class="column is-12">
+                        <table class="table is-striped is-fullwidth ">
+                            <thead>
+                                <tr>
+                                    <th>N°</th>
+                                    <th>Description</th>
+                                    <th>Qté</th>
+                                    <th>Unité</th>
+                                    <th>Prix unitaire</th>
+                                    <th>Montant</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{range .Projects}}
+                                <tr>
+                                    <td>0</td>
+                                    <td>{{.Name}}</td>
+                                    <td>{{.Time}}</td>
+                                    <td>H</td>
+                                    <td>{{.UnitAmount}} {{.Currency}}</td>
+                                    <td>{{.Amount}} {{.Currency}}</td>
+                                </tr>
+                                {{end}}
+                                <tr>
+                                    <th>Sous-total</th>
+                                    <th/>
+                                    <th/>
+                                    <th/>
+                                    <th/>
+                                    <th>000.00 {{.Currency}}</th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="column is-12">
+                        Taux de change appliqué: {{.Currency}}/EUR, selon le taux de change de référence de la BCE au: {{.InvoiceDate}}. Taux: <strong>{{.Rate}}</strong>
+                    </div>
+                    <div class="column is-4 is-offset-8">
+                        <!-- SEPARATOR -->
+                        <table class="table is-striped">
+                            <thead>
+                                <tr>
+                                    <th>Total TTC</th>
+                                    <th>000 {{.Currency}}</th>
+                                </tr>
+                                <tr>
+                                    <th>Total HT</th>
+                                    <th>000 {{.Currency}}</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <div class="container">
+                <div class="columns is-multiline">
+                    <div class="column is-12">
+                        <div class="columns">
+                            <div class="column is-3"><strong>Moyen de paiement:</strong></div>
+                            <div class="column">
+                                <p>Banque: {{.Settings.User.BanqueInfo.BanqueName}}</p>
+                                <p>SWIFT/BIC: {{.Settings.User.BanqueInfo.SwiftBic}}</p>
+                                <p>IBAN: {{.Settings.User.BanqueInfo.IBAN}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-12">
+                        <div class="columns">
+                            <div class="column is-3"><strong>Condition de paiement:</strong></div>
+                            <div class="column">
+                                <p>30 jours</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <div class="container">
+                <div class="columns is-centered">
+                    <div class="column is-narrow has-text-centered">
+                        <p>TVA non applicable, art. 293 B du CGI</p>
+                        <strong>SPANIER Nathan - Auto-entrepreuneur</strong>
+                        <p><i>{{.Settings.User.Address.Address}}</i></p>
+                        <p><i>N° SIRET: {{.Settings.User.SIRET}} - N° TVA: {{.Settings.User.TVANumber}}</i></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+    </html>

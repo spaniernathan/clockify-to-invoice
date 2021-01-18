@@ -1,0 +1,32 @@
+{
+	"User": {
+		"UserInfo": {
+			"CompagnyName": "",
+			"Name": "",
+			"PhoneNumber": "",
+			"Email": ""
+		},
+		"BanqueInfo": {
+			"BanqueName": "",
+			"SwiftBic": "",
+			"IBAN": ""
+		},
+		"UserAddress": {
+			"PostCode": "",
+			"Country": "",
+			"Address": "",
+			"City": ""
+		},
+		"TVANumber": "",
+		"SIRET": ""
+	},
+	"BilledClient": {
+		"ClientName": "",
+		"ClientAddress": {
+			"PostCode": "",
+			"Country": "",
+			"Address": "",
+			"City": ""
+		}
+	}
+}

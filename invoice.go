@@ -1,45 +1,27 @@
 package main
 
-import "fmt"
+import "strconv"
 
-// Project is
-type Project struct {
-	Name   string
-	Time   string
-	Amount string
-}
-
-// Client is
-type Client struct {
-	Name string
-}
-
-// Invoice is
-type Invoice struct {
-	Client  Client
-	Project []Project
-}
-
-// Parse is
-func (inv *Invoice) Parse(records [][]string) error {
+// ParseCSV is parsing the CSV data from Clockify
+func (inv *Invoice) ParseCSV(records [][]string) error {
+	// Parse first line data
+	inv.Currency = "USD"
+	inv.InvoiceDate = ""
+	inv.InvoiceUntil = ""
+	inv.InvoiceNumber = 0 // AAAA MM NBR
 	for i := 1; i < len(records); i++ {
-		inv.Project = append(inv.Project, Project{
+		inv.Projects = append(inv.Projects, Project{
+			Index:  strconv.Itoa(i),
 			Name:   records[i][0],
 			Time:   records[i][4],
 			Amount: records[i][5],
 		})
 	}
-	return nil
-}
-
-// Debug is
-func (inv *Invoice) Debug() error {
-	for i := 0; i < len(inv.Project); i++ {
-		fmt.Printf(`
-			Name: %s
-			Time: %s
-			Amount: %s`,
-			inv.Project[i].Name, inv.Project[i].Time, inv.Project[i].Amount)
+	rate, err := GetRate(inv.Currency)
+	if err != nil {
+		// TODO: err managment
+		return err
 	}
+	inv.Rate = rate
 	return nil
 }
