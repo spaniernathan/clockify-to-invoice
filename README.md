@@ -9,6 +9,8 @@ Contributions are welcome
 yarn
 ```
 
+Fill config file in /settings/default.json
+
 # Run
 ```sh
 go run . create <Clockify CSV File> <Settings JSON File>
