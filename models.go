@@ -56,11 +56,12 @@ type Project struct {
 
 // Invoice struct
 type Invoice struct {
-	InvoiceNumber uint64
+	InvoiceNumber string
 	InvoiceDate   string //date
 	InvoiceUntil  string //date
 	Currency      string
 	Rate          string
+	TotalAmount   string
 	Client        Client
 	Projects      []Project
 	Settings      Settings

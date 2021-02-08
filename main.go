@@ -8,6 +8,7 @@ import (
 	"os"
 	"os/exec"
 	"strings"
+	"time"
 
 	"encoding/csv"
 	"encoding/json"
@@ -29,6 +30,23 @@ type CreateInvoiceCmd struct {
 
 // Run is
 func (cmd *CreateInvoiceCmd) Run(ctx *Context) error {
+	// Parse file name
+	filename := strings.Split(cmd.File, "/")
+	dates := strings.Split(filename[len(filename)-1], "-")
+	from := dates[0][len(dates[0])-10:]
+	to := dates[1][:len(dates[1])-4]
+	toTime, err := time.Parse("20060102", fmt.Sprintf("%s%s%s", to[6:10], to[0:2], to[3:5]))
+	if err != nil {
+		fmt.Println("Couldn't parse date from filename")
+		log.Fatal(err)
+		return err
+	}
+	fromTime, err := time.Parse("20060102", fmt.Sprintf("%s%s%s", from[6:10], from[0:2], from[3:5]))
+	if err != nil {
+		fmt.Println("Couldn't parse date from filename")
+		log.Fatal(err)
+		return err
+	}
 	// CSV File
 	csvFile, err := ioutil.ReadFile(cmd.File)
 	if err != nil {
@@ -48,7 +66,7 @@ func (cmd *CreateInvoiceCmd) Run(ctx *Context) error {
 	var invoice Invoice
 	// TODO: Get current date
 	// Parse file name to get the period
-	err = invoice.ParseCSV(csvData)
+	err = invoice.ParseCSV(csvData, fromTime, toTime)
 	if err != nil {
 		fmt.Println("Couldn't parse CSV")
 		log.Fatal(err)

@@ -4,3 +4,4 @@ clockify-to-invoice
 /node_modules
 /output
 settings/me.json
+*.pdf

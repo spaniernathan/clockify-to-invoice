@@ -15,7 +15,8 @@
         <section class="section">
             <div class="container">
                 <div class="columns">
-                    <div class="column is-5 is-offset-7">
+                    <div class="column"></div>
+                    <div class="column is-3">
                         <p class="title is-6">Facture N°{{.InvoiceNumber}}</p>
                         <p>Date de facturation: {{.InvoiceDate}}</p>
                         <p>Echeance: {{.InvoiceUntil}}</p>
@@ -26,7 +27,7 @@
             <br/>
             <div class="container">
                 <div class="columns">
-                    <div class="column">
+                    <div class="column is-8">
                         <strong>{{.Settings.User.UserInfo.CompagnyName}}</strong>
                         <p>{{.Settings.User.UserInfo.Name}}</p>
                         <p>{{.Settings.User.Address.Address}}</p>
@@ -39,7 +40,6 @@
                         <strong>{{.Settings.Client.Name}}</strong>
                         <p>{{.Settings.Client.Address.Address}}</p>
                         <p>{{.Settings.Client.Address.PostCode}} {{.Settings.Client.Address.City}}</p>
-                        <p>{{.Settings.Client.Address.City}}</p>
                         <p>{{.Settings.Client.Address.Country}}</p>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
             <div class="container">
                 <div class="columns is-multiline">
                     <div class="column is-12">
-                        <table class="table is-striped is-fullwidth ">
+                        <table class="table is-striped is-fullwidth">
                             <thead>
                                 <tr>
                                     <th>N°</th>
@@ -65,12 +65,12 @@
                             <tbody>
                                 {{range .Projects}}
                                 <tr>
-                                    <td>0</td>
+                                    <td>{{.Index}}</td>
                                     <td>{{.Name}}</td>
                                     <td>{{.Time}}</td>
                                     <td>H</td>
-                                    <td>{{.UnitAmount}} {{.Currency}}</td>
-                                    <td>{{.Amount}} {{.Currency}}</td>
+                                    <td>{{.UnitAmount}} {{$.Currency}}</td>
+                                    <td>{{.Amount}} {{$.Currency}}</td>
                                 </tr>
                                 {{end}}
                                 <tr>
@@ -79,7 +79,7 @@
                                     <th/>
                                     <th/>
                                     <th/>
-                                    <th>000.00 {{.Currency}}</th>
+                                    <th>{{.TotalAmount}} {{.Currency}}</th>
                                 </tr>
                             </tbody>
                         </table>
@@ -87,17 +87,18 @@
                     <div class="column is-12">
                         Taux de change appliqué: {{.Currency}}/EUR, selon le taux de change de référence de la BCE au: {{.InvoiceDate}}. Taux: <strong>{{.Rate}}</strong>
                     </div>
-                    <div class="column is-4 is-offset-8">
+                    <div class="column"></div>
+                    <div class="column is-narrow">
                         <!-- SEPARATOR -->
                         <table class="table is-striped">
                             <thead>
                                 <tr>
-                                    <th>Total TTC</th>
-                                    <th>000 {{.Currency}}</th>
+                                    <th><small>Total HT</small></th>
+                                    <th><small>{{.TotalAmount}} {{.Currency}}</small></th>
                                 </tr>
                                 <tr>
-                                    <th>Total HT</th>
-                                    <th>000 {{.Currency}}</th>
+                                    <th>Total TTC</th>
+                                    <th>{{.TotalAmount}} {{.Currency}}</th>
                                 </tr>
                             </thead>
                         </table>
@@ -136,9 +137,9 @@
                 <div class="columns is-centered">
                     <div class="column is-narrow has-text-centered">
                         <p>TVA non applicable, art. 293 B du CGI</p>
-                        <strong>SPANIER Nathan - Auto-entrepreuneur</strong>
-                        <p><i>{{.Settings.User.Address.Address}}</i></p>
-                        <p><i>N° SIRET: {{.Settings.User.SIRET}} - N° TVA: {{.Settings.User.TVANumber}}</i></p>
+                        <strong>{{.Settings.User.UserInfo.Name}} - Auto-entrepreuneur</strong>
+                        <p><i>{{.Settings.User.Address.Address}} {{.Settings.User.Address.PostCode}} {{.Settings.User.Address.City}}</i></p>
+                        <p><i>N° SIRET: {{.Settings.User.SIRET}}</i></p>
                     </div>
                 </div>
             </div>
